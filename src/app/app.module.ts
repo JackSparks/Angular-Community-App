@@ -12,6 +12,15 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { UserService } from './services/user.service';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'users', component: ChatListComponent, outlet: 'chat', },
+  { path: 'users/:username', component: ChatComponent, outlet: 'chat', },
+  { path: '', redirectTo: '/forums', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
+];
 
 @NgModule({
   declarations: [
@@ -27,6 +36,7 @@ import { UserService } from './services/user.service';
     BrowserAnimationsModule,
     ClarityModule.forRoot(),
     ForumsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     UserService
